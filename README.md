@@ -27,6 +27,36 @@ aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
 region=YOUR_REGION (such as us-west-2, us-west-1, etc)
 If you want more information on all the supported methods for configuring credentials, see the boto3 docs.
 
+### Windows
+
+`choco install awscli`  
+`refreshenv`  
+`aws configure`
+
+Get your aws access key through these steps:
+
+1. Open the IAM console at https://console.aws.amazon.com/iam/
+
+2. Click Users 
+![](./images/1.png)
+
+3. Click Add user
+![](./images/2.png)
+
+4. Enter a user name and chose programmatic access type
+![](./images/3.png)
+
+5. Set your permission as AWSLambda_FullAccess
+![](./images/4.png)
+
+6. Review that the IAM user has these following details
+![](./images/5.png)
+
+7. Continue and download your access key as a .csv
+![](./images/6.png)
+
+
+
 ## Deploying
 
 ## Next Steps
@@ -34,3 +64,4 @@ If you want more information on all the supported methods for configuring creden
 ## References
 
 https://github.com/aws/chalice
+https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html
