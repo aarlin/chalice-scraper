@@ -1,34 +1,22 @@
 from chalice import Chalice, Rate
+from requests_html import HTMLSession
+import json
 
-app = Chalice(app_name='helloworld')
+app = Chalice(app_name='scrape')
 
 # Automatically runs every 5 minutes
-@app.schedule(Rate(5, unit=Rate.MINUTES))
-def periodic_task(event):
-    return {"hello": "world"}
+# @app.schedule(Rate(5, unit=Rate.MINUTES))
+@app.route("/local-test")
+def periodic_task():
+    session = HTMLSession()
+    url = 'https://sal.livebytes.co.uk/tc/MonGenApp/gen'
+    resp = session.get(url)
 
+    monster_generator_descriptions = resp.html.find(".w3-padding-32")
 
-# @app.route('/')
-# def index():
-#     return {'hello': 'world'}
+    descriptions = []
 
+    for description in monster_generator_descriptions:
+        descriptions.append(description.text[3:])
 
-# The view function above will return {"hello": "world"}
-# whenever you make an HTTP GET request to '/'.
-#
-# Here are a few more examples:
-#
-# @app.route('/hello/{name}')
-# def hello_name(name):
-#    # '/hello/james' -> {"hello": "james"}
-#    return {'hello': name}
-#
-# @app.route('/users', methods=['POST'])
-# def create_user():
-#     # This is the JSON body the user sent in their POST request.
-#     user_as_json = app.current_request.json_body
-#     # We'll echo the json body back to the user in a 'user' key.
-#     return {'user': user_as_json}
-#
-# See the README documentation for more examples.
-#
+    return json.dumps(descriptions)

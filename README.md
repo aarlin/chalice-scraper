@@ -11,6 +11,7 @@
 `chalice/bin/activate`  
 
 `python -m pip install chalice`
+`pip install -r requirements.txt`
 
 ## Credentials
 
@@ -55,9 +56,12 @@ Get your aws access key through these steps:
 7. Continue and download your access key as a .csv  
 ![](./images/6.png)
 
-
-
 ## Deploying
+
+`chalice new-project helloworld`  
+`chalice local`  
+`chalice deploy`  
+`chalice delete`  
 
 ## Next Steps
 
